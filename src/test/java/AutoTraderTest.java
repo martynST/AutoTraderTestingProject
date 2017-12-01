@@ -121,6 +121,7 @@ public class AutoTraderTest {
         homepage.enterRegNo(inputList.get(12));
         test.log(Status.INFO, "Entering miles: " + inputList.get(13));
         homepage.enterMiles(floatToString(inputList.get(13)));
+        test.log(Status.INFO, "Submitting query");
         homepage.clickCreateAd();
         try {
             Assert.assertEquals(inputList.get(14),webDriver.getCurrentUrl());
@@ -130,6 +131,7 @@ public class AutoTraderTest {
         }
     }
     @Test
+
     public void getValuation()
     {
         spreadSheetReader = new SpreadSheetReader("testData.xlsx");
@@ -137,8 +139,29 @@ public class AutoTraderTest {
         inputList = spreadSheetReader.readRow(1, "Sheet1");
         ExtentTest test = report.createTest("createAd");
         HomePage homepage = PageFactory.initElements(webDriver, HomePage.class);
+        CarValuation carValuation  = PageFactory.initElements(webDriver, CarValuation.class);
         test.log(Status.INFO, "Going to url: " + url);
         webDriver.navigate().to(url);
+        test.log(Status.INFO, "Going to valuation page");
+        homepage.gotoValuation();
+        try {
+            Assert.assertEquals(inputList.get(15),webDriver.getCurrentUrl());
+            test.log(Status.PASS,"Passed url comparison assertion");
+        } catch (AssertionError e) {
+            test.log(Status.FAIL,"Failed url comparison assertion");
+        }
+        test.log(Status.INFO, "Entering Reg Number: " + inputList.get(12));
+        carValuation.enterRegNo(inputList.get(12));
+        test.log(Status.INFO, "Entering miles: " + inputList.get(13));
+        carValuation.enterMiles(floatToString(inputList.get(13)));
+        test.log(Status.INFO, "Submitting query");
+        carValuation.clickGetValidation();
+        try {
+            Assert.assertEquals(inputList.get(12),carValuation.getConfirmRegNo().getText());
+            test.log(Status.PASS,"Passed url comparison assertion");
+        } catch (AssertionError e) {
+            test.log(Status.FAIL,"Failed url comparison assertion");
+        }
     }
     private void mySleep()
     {

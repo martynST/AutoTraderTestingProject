@@ -10,7 +10,7 @@ public class HomePage {
     @FindBy(css = "#js-channel-nav > ul.other-vehicles__list > li:nth-child(3) > a")
     private WebElement vansTab;
     @FindBy(css = "body > main > div > section.sell__nav.t-row.cars > a")
-    private WebElement validation;
+    private WebElement valuation;
     @FindBy(id = "postcode")
     private WebElement postcode;
     @FindBy(id = "radius")
@@ -109,8 +109,8 @@ public class HomePage {
     {
         vansTab.click();
     }
-    public void gotoValidation()
+    public void gotoValuation()
     {
-        validation.click();
+        valuation.click();
     }
 }
