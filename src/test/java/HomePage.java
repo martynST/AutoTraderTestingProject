@@ -9,6 +9,8 @@ public class HomePage {
     private WebElement prestigeCarsTab;
     @FindBy(css = "#js-channel-nav > ul.other-vehicles__list > li:nth-child(3) > a")
     private WebElement vansTab;
+    @FindBy(css = "body > main > div > section.sell__nav.t-row.cars > a")
+    private WebElement validation;
     @FindBy(id = "postcode")
     private WebElement postcode;
     @FindBy(id = "radius")
@@ -33,6 +35,8 @@ public class HomePage {
     private WebElement regNo;
     @FindBy(css = "#js-sell-module > form > input.c-form__input.no-spinner")
     private WebElement miles;
+    @FindBy(css = "#js-sell-module > form > button")
+    private WebElement createAd;
 
 
     public void enterPostcode(String postcode)
@@ -80,6 +84,18 @@ public class HomePage {
     {
         search.click();
     }
+    public void enterRegNo(String regNo)
+    {
+        this.regNo.sendKeys(regNo);
+    }
+    public void enterMiles(String miles)
+    {
+        this.miles.sendKeys(miles);
+    }
+    public void clickCreateAd()
+    {
+        this.createAd.click();
+    }
 
     public void gotoCars()
     {
@@ -92,5 +108,9 @@ public class HomePage {
     public void gotoVansTab()
     {
         vansTab.click();
+    }
+    public void gotoValidation()
+    {
+        validation.click();
     }
 }

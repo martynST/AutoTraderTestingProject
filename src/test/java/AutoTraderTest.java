@@ -65,7 +65,7 @@ public class AutoTraderTest {
         inputList = spreadSheetReader.readRow(1, "Sheet1");
         ExtentTest test = report.createTest("searchForCars");
         HomePage homepage = PageFactory.initElements(webDriver, HomePage.class);
-        test.log(Status.INFO, "Going to url - " + url);
+        test.log(Status.INFO, "Going to url: " + url);
         webDriver.navigate().to(url);
         test.log(Status.INFO, "Entering the postcode: " + inputList.get(2));
         homepage.enterPostcode(inputList.get(2));
@@ -108,9 +108,37 @@ public class AutoTraderTest {
         }
     }
     @Test
-    public void createAdd()
+    public void createAd()
     {
-
+        spreadSheetReader = new SpreadSheetReader("testData.xlsx");
+        List<String> inputList;
+        inputList = spreadSheetReader.readRow(1, "Sheet1");
+        ExtentTest test = report.createTest("createAd");
+        HomePage homepage = PageFactory.initElements(webDriver, HomePage.class);
+        test.log(Status.INFO, "Going to url: " + url);
+        webDriver.navigate().to(url);
+        test.log(Status.INFO, "Entering Reg Number: " + inputList.get(12));
+        homepage.enterRegNo(inputList.get(12));
+        test.log(Status.INFO, "Entering miles: " + inputList.get(13));
+        homepage.enterMiles(floatToString(inputList.get(13)));
+        homepage.clickCreateAd();
+        try {
+            Assert.assertEquals(inputList.get(14),webDriver.getCurrentUrl());
+            test.log(Status.PASS,"Passed url comparison assertion");
+        } catch (AssertionError  e) {
+            test.log(Status.FAIL,"Failed url comparison assertion");
+        }
+    }
+    @Test
+    public void getValuation()
+    {
+        spreadSheetReader = new SpreadSheetReader("testData.xlsx");
+        List<String> inputList;
+        inputList = spreadSheetReader.readRow(1, "Sheet1");
+        ExtentTest test = report.createTest("createAd");
+        HomePage homepage = PageFactory.initElements(webDriver, HomePage.class);
+        test.log(Status.INFO, "Going to url: " + url);
+        webDriver.navigate().to(url);
     }
     private void mySleep()
     {
